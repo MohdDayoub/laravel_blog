@@ -1,0 +1,48 @@
+a {
+    text-decoration: none;
+}
+
+.side_bar{
+    background-color: #616161;
+    color: #ffffff;
+    text-align: center;
+}
+
+.menu_item {
+    padding: 8px;
+    margin: 8px 0;
+    border-radius: 5px;
+    color: #ccc;
+    text-decoration: none;
+}
+
+.menu_item:hover {
+    background-color:#BDBDBD;
+    color: #000;
+}
+
+.menu_item_active {
+    background-color:#BDBDBD;
+    color: #000;
+}
+
+.menu_item i {
+    color: #E65177;
+}
+
+.login_pad {
+    padding: 50px 0;
+}
+
+.col2 {
+    display: flex;
+}
+
+@media screen and (max-width: 800px) {
+    .login_pad {
+        padding: 20px 0;
+    }
+    .col2 {
+        display: none;
+    }
+}
