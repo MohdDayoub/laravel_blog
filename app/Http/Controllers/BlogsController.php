@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Authors;
 use App\Models\Blogs;
 use Illuminate\Http\Request;
 
