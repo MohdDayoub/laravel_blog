@@ -16,7 +16,6 @@
     @yield('cssAndJs')
 </head>
 <body class="">
-Helllllllllllo
 <div class="row">
     <div class="col-2 side_bar" style="height: 100vh">
 
