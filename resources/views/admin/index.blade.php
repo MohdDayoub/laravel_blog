@@ -2,4 +2,5 @@
 
 @section('main')
 
+    hello
 @endsection
