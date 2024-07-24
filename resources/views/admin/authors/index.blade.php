@@ -15,7 +15,7 @@
 
         @foreach($authors as $author)
             <tr>
-                <td>{{$author->image}}</td>
+                <td><img src="{{url('/storage/media/'.$author->image)}}" style="width: 200px"></td>
                 <td>{{$author->name}}</td>
                 <td>{{$author->description}}</td>
             </tr>
