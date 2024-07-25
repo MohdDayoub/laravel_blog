@@ -6,6 +6,7 @@ a {
     background-color: #616161;
     color: #ffffff;
     text-align: center;
+    position: relative;
 }
 
 .menu_item {
@@ -14,6 +15,7 @@ a {
     border-radius: 5px;
     color: #ccc;
     text-decoration: none;
+    position: relative;
 }
 
 .menu_item:hover {
@@ -45,4 +47,21 @@ a {
     .col2 {
         display: none;
     }
+}
+
+.top_bar{
+    background-color: #616161;
+    color: fff;
+    /* height: 40px; */
+    padding-top: 10px;
+    padding-bottom: 10px;
+    align-items: center;
+    /* display:; */
+}
+
+.logout_link{
+    bottom: 0;
+    right: 0;
+    left: 0;
+    position: absolute;
 }

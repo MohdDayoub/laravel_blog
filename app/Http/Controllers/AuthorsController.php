@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EditRequest;
 use App\Http\Requests\StoreAuthorRequest;
 use App\Models\Authors;
 use Illuminate\Http\Request;
@@ -35,7 +36,6 @@ class AuthorsController extends Controller
     public function store(StoreAuthorRequest $request)
     {
         try{
-
             //insert to db
             Authors::create([
                 'name' => $request->name,
@@ -67,24 +67,40 @@ class AuthorsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Authors $authors)
-    {
-        //
-    }
+    // public function edit(Authors $authors)
+    // {
+    // //    return view('')
+    // }
 
+    public function edit(string $id)
+    {
+        $author = Authors::findOrFail($id);
+        return view('admin.authors.edit', compact('author'));
+    }
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Authors $authors)
+    public function update(EditRequest $request, Authors $author)
     {
-        //
+        $author->name = $request->name;
+        $author->description = $request->des;
+
+        if ($request->image != null) {
+            $author->image = $request->image;
+        }
+
+        $author->save();
+        return back();
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Authors $authors)
+
+
+    public function destroy(Authors $author)
     {
-        //
+        $author->delete();
+        return back();
     }
 }
