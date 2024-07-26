@@ -21,8 +21,9 @@
 </div>
 @endif
 
-<form action="{{route('dashboard.authors.store')}}" method="post" enctype="multipart/form-data">
+<form action="{{route('dashboard.authors.update',[$author])}}" method="post" enctype="multipart/form-data">
     @csrf
+    @method('put')
     <div class="card">
         <div class="card-header text-center bg-secondary text-white">
             <h5>Add New Author</h5>
@@ -30,16 +31,26 @@
         <div class="card-body">
             <div class="mb-3">
                 <label for="name" class="form-label">Author Name</label>
-                <input type="text" class="form-control" name="name" id="name">
+                <input value="{{$author->name}}" type="text" class="form-control" name="name" id="name">
             </div>
             <div class="mb-3">
                 <label for="des" class="form-label">Author Bio</label>
-                <textarea class="form-control" name="des" id="des" rows="3"></textarea>
+                <textarea class="form-control" name="des" id="des" rows="3">{{$author->description}}</textarea>
             </div>
-            <div class="mb-3">
-                <label for="name" class="form-label">Author Image</label>
-                <input type="file" class="form-control" name="image" id="image">
+
+            <div class="row">
+                <div class="col-10">
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Author Image</label>
+                        <input type="file" class="form-control" name="image" id="image">
+                    </div>
+                </div>
+                <div class="col-2">
+                    current Image
+                    <img src="{{url('storage/media/'.$author->image)}}" alt="" style="width:100px">
+                </div>
             </div>
+
             <div class="mb-3 text-center">
                 <button type="submit" class="btn btn-secondary w-50">Send</button>
             </div>

@@ -6,8 +6,19 @@ a {
     background-color: #616161;
     color: #ffffff;
     text-align: center;
+    position: relative;
 }
-
+.logout_link {
+    color: #ffffff;
+    /* padding: 10px 0; */
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left:0;
+}
+.top_bar a {
+    color: #fff;
+}
 .menu_item {
     padding: 8px;
     margin: 8px 0;

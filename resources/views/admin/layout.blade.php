@@ -25,13 +25,15 @@
         <div class="col-2 side_bar" style="height: 100vh">
 
             <div class="my-2">
-                <img class="img-fluid w-50" src="{{asset('images/logo.png')}}">
+                <img class="img-fluid " src="{{asset('images/logo.png')}}" style="width:60px">
 
-                <h4 class="text-white mt-2">YEP</h4>
+                <h4 class="text-white mt-2">
+                    {{Auth::user()->name}}
+                </h4>
             </div>
 
 
-            <hr style="color: #fff" />
+            <hr class="text-white m-0 p-0" style="color: #fff" />
 
             <div class="mx-4 text-start">
 
@@ -57,15 +59,27 @@
                 </a>
             </div>
 
+            <div class="mx-4 text-start">
+                <a class="logout_link mx-4 text-start text-white" href="{{route('logout') }}">
+                    <div class="menu_item">
+                        <i class="fa-solid fa-arrow-right mx-2 text-white"></i>
+                        logout
+                    </div>
+                </a>
+            </div>
 
         </div>
 
         <div class="col-10 p-0 m-0">
 
-            <div class="w-100 bg-info" style="height: 40px;">
-
-                <a href="{{ route('logout') }}">Log out</a>
-            </div>
+            <!-- <div class="w-100 top_bar">
+                <div class="row m-0">
+                    <div class="col-6 text-start">
+                        <a href="{{ route('logout') }}">Log out</a>
+                    </div>
+                    <div class="col-6"></div>
+                </div>
+            </div> -->
 
             <div class="p-4">
                 @yield('main')
