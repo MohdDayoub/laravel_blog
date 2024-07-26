@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\StoreBlogRequest;
+use App\Http\Requests\UpdateBlogRequest;
+use App\Models\Authors;
 use App\Models\Blogs;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -64,17 +66,35 @@ class BlogsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        return 'edit';
+        $blog = Blogs::find($id);
+        $authors = Authors::get();
+
+        return view('admin.blogs.edit', compact('blog', 'authors'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateBlogRequest $request, $id)
     {
-        return 'update';
+        // dd($blog);
+        // dd($blog->title);
+        // dd($request->title);
+
+        $blog = Blogs::find($id);
+        
+        $blog->title = $request->title;
+        $blog->content = $request->content;
+        $blog->author_id = $request->author_id;
+
+        if ($request->image != null) {
+            $blog->image = $request->image;
+        }
+
+        $blog->save();
+        return back()->with('success', 'updated successfully');
     }
 
     /**
