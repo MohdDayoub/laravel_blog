@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreBlogRequest;
 use App\Models\Blogs;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Mockery\Exception;
 
 class BlogsController extends Controller
 {
@@ -12,9 +15,11 @@ class BlogsController extends Controller
      */
     public function index()
     {
-        $blogs = Blogs::get();
+        $blogs = Blogs::leftJoin('authors', 'authors.id', '=', 'blogs.author_id')
+            ->select('blogs.*', 'authors.name as author_name')
+            ->get();
 
-        return  View('admin.blogs.index',compact('blogs'));
+        return  View('admin.blogs.index', compact('blogs'));
     }
 
     /**
@@ -22,37 +27,30 @@ class BlogsController extends Controller
      */
     public function create()
     {
-        return  View('admin.blogs.create');
+        $authors = DB::table('authors')->get();
+
+        return  View('admin.blogs.create', compact('authors'));
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreBlogRequest $request)
     {
-        $validated = $request->validate(
-            [
-                'title' => 'required|string|max:255|min:10',
-                'content' => 'required|string|min:10'
-            ]
-        );
+        try {
 
-        $title = $request->title;
-        $content = $request->content;
+            Blogs::create([
+                'title' => $request->title,
+                'content' => $request->content,
+                'author_id' => $request->author_id,
+                'image' => $request->image,
+            ]);
 
-        $check = Blogs::create([
-            'title' => $title,
-            'content' => $content,
-            'author_id' => 1,
-        ]);
+            return back()->with('success', 'The Blog has inserted successfully');
+        } catch (Exception $e) {
 
-        if($check)
-        {
-            return redirect(route('posts.index'));
-        }else{
-            return 'error';
+            return back()->withErrors(['error' => 'something happend']);
         }
-
     }
 
     /**
