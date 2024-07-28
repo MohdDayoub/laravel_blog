@@ -51,6 +51,13 @@
                     </div>
                 </a>
 
+                <a href="{{route('dashboard.categories.index')}}">
+                    <div class="menu_item @if(request()->routeIs('dashboard.categories.*')) menu_item_active @endif">
+                        <i class="fa-solid fa-house mx-2"></i>
+                        Categories
+                    </div>
+                </a>
+
                 <a href="{{route('dashboard.authors.index')}}">
                     <div class="menu_item  @if(request()->routeIs('dashboard.authors.*')) menu_item_active @endif">
                         <i class="fa-solid fa-house mx-2"></i>

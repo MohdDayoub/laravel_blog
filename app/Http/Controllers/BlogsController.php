@@ -17,9 +17,11 @@ class BlogsController extends Controller
      */
     public function index()
     {
-        $blogs = Blogs::leftJoin('authors', 'authors.id', '=', 'blogs.author_id')
-            ->select('blogs.*', 'authors.name as author_name')
-            ->get();
+        // $blogs = Blogs::leftJoin('authors', 'authors.id', '=', 'blogs.author_id')
+        //     ->select('blogs.*', 'authors.name as author_name')
+        //     ->get();
+
+        $blogs = Blogs::with('author')->get();
 
         return  View('admin.blogs.index', compact('blogs'));
     }
@@ -29,7 +31,8 @@ class BlogsController extends Controller
      */
     public function create()
     {
-        $authors = DB::table('authors')->get();
+        $authors = Authors::get();
+        // $authors = DB::table('authors')->get();
 
         return  View('admin.blogs.create', compact('authors'));
     }
@@ -41,12 +44,14 @@ class BlogsController extends Controller
     {
         try {
 
-            Blogs::create([
-                'title' => $request->title,
-                'content' => $request->content,
-                'author_id' => $request->author_id,
-                'image' => $request->image,
-            ]);
+            // Blogs::create([
+            //     'title' => $request->title,
+            //     'content' => $request->content,
+            //     'author_id' => $request->author_id,
+            //     'image' => $request->image,
+            // ]);
+
+            Blogs::create($request->all());
 
             return back()->with('success', 'The Blog has inserted successfully');
         } catch (Exception $e) {

@@ -54,11 +54,15 @@
                 <label for="author_id" class="form-label">Blog's Author</label>
                 <select name="author_id" id="" class="mt-2">
                     @foreach ($authors as $author)
-                    @if ($author->id == $blog->author_id)
+                    <!-- @if ($author->id == $blog->author_id)
                     <option selected value={{$author->id}}>{{$author->name}}</option>
                     @else
                     <option value={{$author->id}}>{{$author->name}}</option>
-                    @endif
+                    @endif -->
+                    <option value={{$author->id}} @if($author->id == $blog->author_id) selected @endif>
+                        {{$author->name}}
+                    </option>
+
                     @endforeach
                 </select>
             </div>

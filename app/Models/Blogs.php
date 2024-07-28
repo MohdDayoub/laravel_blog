@@ -15,4 +15,10 @@ class Blogs extends Model
         'image',
         'author_id',
     ];
+
+    public function author()
+    {
+        return $this->belongsTo(Authors::class, 'author_id');
+        // return $this->belongsTo(Authors::class,'id','author_id');
+    }
 }
