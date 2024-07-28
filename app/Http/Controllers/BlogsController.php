@@ -60,7 +60,8 @@ class BlogsController extends Controller
      */
     public function show(string $id)
     {
-        return 'show';
+        $blog = Blogs::find($id);
+        return view('admin.blogs.show', compact('blog'));
     }
 
     /**
@@ -84,7 +85,7 @@ class BlogsController extends Controller
         // dd($request->title);
 
         $blog = Blogs::find($id);
-        
+
         $blog->title = $request->title;
         $blog->content = $request->content;
         $blog->author_id = $request->author_id;
@@ -102,6 +103,10 @@ class BlogsController extends Controller
      */
     public function destroy(string $id)
     {
-        return 'destroy';
+        $blog = Blogs::find($id);
+
+        $blog->delete();
+        // return view('admin.posts.index');
+        return back();
     }
 }

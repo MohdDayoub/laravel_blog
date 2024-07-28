@@ -27,22 +27,22 @@
                 @foreach($blogs as $blog)
                 <tr>
                     <td><img src="{{url('storage/media/'.$blog->image)}}" alt="" style="width:100px;height:100px;object-fit:cover"></td>
-                    <td>{{$blog->title}}</td>
+                    <td><a href="{{route('dashboard.posts.show',[$blog->id])}}">{{$blog->title}}</a></td>
                     <td>{{substr($blog->content, 0, 50)}}...</td>
                     <td>{{$blog->author_name}}</td>
                     <td>
-                        <!-- <form action="{{route('dashboard.posts.destroy',[$blog])}}" method="post">
+                        <form action="{{route('dashboard.posts.destroy',[$blog->id])}}" method="post">
                             @csrf
-                            @method('delete') -->
+                            @method('delete')
 
-                        <a href="{{url('dashboard/posts/'.$blog->id.'/edit')}}" class="btn btn-success ">
-                            <i class="fa-solid fa-edit mx-2 text-white"></i>
-                        </a>
+                            <a href="{{url('dashboard/posts/'.$blog->id.'/edit')}}" class="btn btn-success ">
+                                <i class="fa-solid fa-edit mx-2 text-white"></i>
+                            </a>
 
-                        <!-- <button type="submit" class="btn btn-danger ">
+                            <button type="submit" class="btn btn-danger ">
                                 <i class="fa-solid fa-trash mx-2 text-white"></i>
-                            </button> -->
-                        <!-- </form> -->
+                            </button>
+                        </form>
 
                     </td>
                 </tr>
